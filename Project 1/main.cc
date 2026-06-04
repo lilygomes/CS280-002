@@ -38,6 +38,14 @@ void print_board(Chess* c) {
   }
 }
 
+// check if board solved
+bool is_solved(Chess* b) {
+  for (int y = 0; y < 8; y++)
+    for (int x = 0; x < 8; x++)
+       if (b->board[y][x] == 0) return false;
+  return true;
+}
+
 // movement function
 enum Movement_direction {upleft, upright, leftup, leftdown, rightup, rightdown, downright, downleft, unset};
 bool move(Movement_direction d, Chess* b) {
@@ -286,7 +294,7 @@ int main(int argc, char** argv) {
       cout << "Cannot determine next move from position [" << row << "][" << col << "]" << endl;
       return 2;
     }
-  } while (true && (row != 0 || col != 0)); // TODO remove dummy switch
+  } while (!is_solved(&c));
 
 
   // at the end, print the board
