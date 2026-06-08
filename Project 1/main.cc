@@ -12,16 +12,16 @@ using namespace std;
 
 // board to traverse
 // row, col
-class Chess {
-  public: 
-    short board[8][8] = {0}; 
-};
+short board[8][8] = {0}; 
 // where am i?
 short row, col = 0;
 // how many times have i moved?
 short turns = 1;
 // syntactic sugar
 const short KNIGHT = 32766;
+// parameters
+const short START_ROW = 0;
+const short START_COL = 0;
 
 // prints out board
 void print_board(Chess* c) {
@@ -124,7 +124,7 @@ bool move(Movement_direction d, Chess* b) {
 int main(int argc, char** argv) {
   // place knight in top-left corner
   Chess c;
-  c.board[0][0] = KNIGHT;
+  c.board[START_ROW][START_COL] = KNIGHT;
 
   // keep moving through the board until we return to start 
   do {
