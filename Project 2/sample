@@ -1,0 +1,6 @@
+a=1
+a=a+b-c*d
+a=a//b++c
+b=gr
+b/=4
+co=gr+3
