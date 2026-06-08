@@ -43,8 +43,11 @@ bool is_solved(Chess* b) {
   for (int y = 0; y < 8; y++)
     for (int x = 0; x < 8; x++)
        if (b->board[y][x] == 0) return false;
-  return true;
+  return b->board[START_ROW][START_COL] == KNIGHT;
 }
+
+// check if space empty
+bool is_empty()
 
 // movement function
 enum Movement_direction {upleft, upright, leftup, leftdown, rightup, rightdown, downright, downleft, unset};
