@@ -151,12 +151,13 @@ int main(int argc, char *argv[]) {
   // read each line of input file
   char input_line[80] = {0};
   while (fgets(input_line, INPUT_LEN, input_file) != NULL) {
-    // remove newline from file
+    // remove newline from line
     char trimmed[80] = {0};
     int len = strlen(input_line);
-    if (input_line[len - 1] == '\n')
+    if (input_line[len - 1] == '\n') {
       strncpy(trimmed, input_line, len - 1);
-    else
+      input_line[len - 1] = 0;
+    } else
       strncpy(trimmed, input_line, len);
     // test 
     printf("%s is %sin the language.\n", input_line, A(trimmed) ? "" : "not ");
