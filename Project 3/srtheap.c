@@ -29,9 +29,12 @@ void buildheap(void *hptr, size_t nelem, int inode, size_t size, int (*compar)(c
     imax = ileft;
   if (iright < nelem && compar(hptr + size * imax, hptr + size * iright) <= 0)
     imax = iright;
-  // if root of node is not largest, swap 'em
-  if (imax != inode)
+  // if root of node is not largest...
+  if (imax != inode) {
+    // ...swap them around and check again
     swap(hptr + size * inode, hptr + size * imax, size);
+    buildheap(hptr, nelem, imax, size, compar);
+  }
 }
 
 void srtheap(void* base, size_t nelem, size_t size, int (*compar)(const void *, const void *)) {
