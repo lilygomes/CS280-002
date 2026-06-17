@@ -48,8 +48,3 @@ void srtheap(void* base, size_t nelem, size_t size, int (*compar)(const void *, 
     buildheap(base, i, 0, size, compar);
   }
 }
-
-// Returns index of parent node for a given index in the heap
-int iparent(size_t inode) {
-  return floor((inode - 1) / 2);
-}
