@@ -6,10 +6,48 @@
  */
 
 #include <iostream>
+#include <cmath>
 
+using std::cout;
+using std::endl;
 using std::ostream;
 
+struct complex {
+  complex(double = 0, double = 1);
+  // binary infix: complex · complex
+  complex operator+(const complex &) const;
+  complex operator-(const complex &) const;
+  complex operator*(const complex &) const;
+  complex operator/(const complex &) const;
+  // binary infix: complex · double
+  complex operator+(double) const;
+  complex operator-(double) const;
+  complex operator*(double) const;
+  complex operator/(double) const;
+  // binary infix: double · complex
+  friend complex operator+(double, const complex &);
+  friend complex operator-(double, const complex &);
+  friend complex operator*(double, const complex &);
+  friend complex operator/(double, const complex &);
+  friend ostream &operator<<(ostream &, const complex &);
+  // additional properties
+  complex conjugate() const;
+  double modulus() const;
+private:
+  double a;
+  double b;
+};
+
 complex::complex(double a, double b) : a(a), b(b) {}
+
+// Complex property functions
+complex complex::conjugate() const {
+  return complex(a, -1 * b);
+}
+
+double complex::modulus() const {
+  return sqrt(a * a + b * b);
+}
 
 // Addition functions
 complex complex::operator+(const complex &z) const {
@@ -45,14 +83,30 @@ complex complex::operator*(const complex &z) const {
 }
 
 complex complex::operator*(const double d) const {
-  return complex(a * d, b);
+  return complex(a * d, b * d);
 }
 
 complex operator*(double d, const complex &z) {
-  return complex(z.a * d, z.b);
+  return complex(z.a * d, z.b * d);
 }
 
 // Division functions
+complex complex::operator/(const complex &z) const {
+  // Multiply both complex numbers by the conjugate of the divisor
+  complex numerator = *this * z.conjugate();
+  complex denominator = z * z.conjugate();
+  // The denominator cancels out its imaginary term, divide the numerator by the denominator as a real number
+  numerator = numerator / denominator.a;
+  return numerator;
+}
+
+complex complex::operator/(const double d) const {
+  return complex(a / d, b / d);
+}
+
+complex operator/(double d, const complex &z) {
+  return complex(z.a / d, z.b / d);
+}
 
 // Print operator
 ostream &operator<<(ostream &out, const complex &z) {
@@ -63,4 +117,28 @@ ostream &operator<<(ostream &out, const complex &z) {
     out << " + " << z.b << "i";
   out << ')';
   return out;
+}
+
+// test methods
+int main() {
+  complex x(7, 4);
+  complex y(3, 2);
+  double z = 2.4;
+
+  cout << x << " + " << y << " = " << x + y << endl;
+  cout << x << " - " << y << " = " << x - y << endl;
+  cout << x << " * " << y << " = " << x * y << endl;
+  cout << x << " / " << y << " = " << x / y << endl;
+
+  cout << x << " + " << z << " = " << x + z << endl;
+  cout << x << " - " << z << " = " << x - z << endl;
+  cout << x << " * " << z << " = " << x * z << endl;
+  cout << x << " / " << z << " = " << x / z << endl;
+
+  cout << z << " + " << x << " = " << z + x << endl;
+  cout << z << " - " << x << " = " << z - x << endl;
+  cout << z << " * " << x << " = " << z * x << endl;
+  cout << z << " / " << x << " = " << z / x << endl;
+
+  cout << "|" << x << "| = " << x.modulus() << endl; 
 }
