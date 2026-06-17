@@ -1,8 +1,8 @@
 /*
  * Lily Gomes
  * CS 280-002
- * Project 2: Recursive Descent Parsing
- * 11 June 2026
+ * Project 3: Heap Sort
+ * 25 June 2026
  */
 
 /*
