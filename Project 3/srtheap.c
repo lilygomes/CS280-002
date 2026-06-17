@@ -38,21 +38,15 @@ void buildheap(void *hptr, size_t nelem, int inode, size_t size, int (*compar)(c
 }
 
 void srtheap(void* base, size_t nelem, size_t size, int (*compar)(const void *, const void *)) {
-  // create new void* for heap
-  void* heap = calloc(nelem, size);
-  memcpy(heap, base, size * nelem);
   // work backwards through heap nodes to sort into max-heap
   for (int i = nelem / 2 - 1; i >= 0; i--)
-    buildheap(heap, nelem, i, size, compar);
+    buildheap(base, nelem, i, size, compar);
 
   // first node in current heap should be largest node, so let's move that to the end of the heap and re-sort through the rest
   for (int i = nelem - 1; i >= 0; i--) {
-    swap(heap, heap + size * i, size);
-    buildheap(heap, i, 0, size, compar);
+    swap(base, base + size * i, size);
+    buildheap(base, i, 0, size, compar);
   }
-
-  // TODO figure out a better way to do this
-  memcpy(base, heap, size * nelem);
 }
 
 // Returns index of parent node for a given index in the heap
