@@ -13,7 +13,7 @@ using std::endl;
 using std::ostream;
 
 struct complex {
-  complex(double = 0, double = 1);
+  complex(double = 0, double = 0);
   // binary infix: complex · complex
   complex operator+(const complex &) const;
   complex operator-(const complex &) const;
@@ -30,6 +30,8 @@ struct complex {
   friend complex operator*(double, const complex &);
   friend complex operator/(double, const complex &);
   friend ostream &operator<<(ostream &, const complex &);
+  // allow autoconversion for double to complex
+  complex operator=(double) const;
   // additional properties
   complex conjugate() const;
   double modulus() const;
@@ -47,6 +49,11 @@ complex complex::conjugate() const {
 
 double complex::modulus() const {
   return sqrt(a * a + b * b);
+}
+
+// Assignment overload
+complex complex::operator=(double d) const {
+  return complex(d, 0);
 }
 
 // Addition functions
@@ -112,7 +119,7 @@ complex operator/(double d, const complex &z) {
 ostream &operator<<(ostream &out, const complex &z) {
   out << '(' << z.a;
   if (z.b < 0)
-    out << " - " << z.b << "i";
+    out << " - " << abs(z.b) << "i";
   else if (z.b > 0)
     out << " + " << z.b << "i";
   out << ')';
@@ -124,6 +131,7 @@ int main() {
   complex x(7, 4);
   complex y(3, 2);
   double z = 2.4;
+  complex z2 = z;
 
   cout << x << " + " << y << " = " << x + y << endl;
   cout << x << " - " << y << " = " << x - y << endl;
@@ -140,5 +148,7 @@ int main() {
   cout << z << " * " << x << " = " << z * x << endl;
   cout << z << " / " << x << " = " << z / x << endl;
 
-  cout << "|" << x << "| = " << x.modulus() << endl; 
+  cout << "|" << x << "| = " << x.modulus() << endl;
+  cout << x << "† = " << x.conjugate() << endl;
+  cout << z << " = " << z2 << endl;
 }
