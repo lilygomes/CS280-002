@@ -1,6 +1,6 @@
 /*
  * Lily Gomes
- * CS 280-002
+ * CS 280-011
  * Project 4: Complex Numbers
  * 1 July 2026
  */
