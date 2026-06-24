@@ -3,4 +3,18 @@ CS280 - Programming Language Concepts
 Professor Kapleau
 1 July 2026
 
+A Comparison of Class Implementations: Complex Numbers
+
+    The Norwegian duo of Kristen Nygaard and Ole-Johan Dahl are widely credited for the creation of the first programming language with classes: SIMULA I, released in 1964. Based on ALGOL 60, it made the pioneering jump from simple code blocks to derived multi-variable types with their own defined behaviours. C++ made 
+
+see sebesta11.pptx for more info on how to describe obj-oriented programming and abstract data types
+C++ vs. C:
+ - inheritance
+ - encapsulation
+ - polymorphism
+   C does not have full classes that can have access modifiers and obscured (private) fields/logic, the most modular and instantiable unit is just a struct
+   C++ creates full classes that can hide data and can properly encapsulate data
+   C supports "object-like" structs but lacks most of the functionality of C++
+   e.g. obj.method(args) vs function(obj, args)
+
 
