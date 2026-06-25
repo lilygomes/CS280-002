@@ -79,7 +79,6 @@ if __name__ == '__main__':
 
     a = complexnum(7, 4)
     b = complexnum(3, 2)
-    c = complexnum(7, 4)
 
     i = 2.4
 
@@ -101,4 +100,5 @@ if __name__ == '__main__':
     print('|%s| = %s' % (a, a.modulus()))
     print('%s† = %s' % (a, a.conjugate()))
     print('%s is%s equal to %s' % (a, "" if a == b else " not", b))
-    print('%s is%s equal to %s' % (a, "" if a == c else " not", c))
+    b += complexnum(4, 2)
+    print('%s is%s equal to %s' % (a, "" if a == b else " not", b))
