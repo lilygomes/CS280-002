@@ -64,6 +64,9 @@ class complexnum:
     def __rsub__(self, other):
         return complexnum(other) - self
 
+    def __eq__(self, other):
+        return (self.a == other.a) and (self.b == other.b)
+
     def __str__(self):
         imaginary = ''
         if (self.b < 0):
@@ -76,6 +79,7 @@ if __name__ == '__main__':
 
     a = complexnum(7, 4)
     b = complexnum(3, 2)
+    c = complexnum(7, 4)
 
     i = 2.4
 
@@ -96,3 +100,5 @@ if __name__ == '__main__':
 
     print('|%s| = %s' % (a, a.modulus()))
     print('%s† = %s' % (a, a.conjugate()))
+    print('%s is%s equal to %s' % (a, "" if a == b else " not", b))
+    print('%s is%s equal to %s' % (a, "" if a == c else " not", c))
