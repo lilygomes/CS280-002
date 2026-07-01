@@ -5,7 +5,18 @@ Professor Kapleau
 
 A Comparison of Class Implementations: Complex Numbers
 
-    The Norwegian duo of Kristen Nygaard and Ole-Johan Dahl are widely credited for the creation of the first programming language with classes: SIMULA I, released in 1964. Based on ALGOL 60, it made the pioneering jump from simple code blocks to derived multi-variable types with their own defined behaviours. C++ 
+    The Norwegian duo of Kristen Nygaard and Ole-Johan Dahl are widely credited for the creation of the first programming language with classes: SIMULA I, released in 1964. Based on ALGOL 60, it made the pioneering jump from simple code blocks to derived multi-variable types with their own defined behaviours. Just short of a decade later, Dennis Ritchie's C language shook up the programming scene with a hands-on design ethos that exposed mechanisms of memory while being portable enough to allow cross-platform development. C had some core concepts from object-oriented programming, namely polymorphism through pointers and structs providing partial encapsulation. In 1985, Bjarne Stroustrup's experiments in adding classes to C culminated in the release of C++. C++ brought the power of SIMULA's object-oriented paradigm to the hackable and versatile C language. Sun Microsystems used C++ as their key inspiration for designing Java, an object-centric language designed to increase the portability of code and reduce possibility for corruption. Java's design philosophy, as a result, proves more restrictive and verbose in points than C++ to achieve the same goals. Python, a multi-paradigm language designed by Guido van Rossum through the 90s, includes many of the features that defined Java, but implements them differently. Python's emphasis on elegance and a lack of boilerplating creates a much less verbose language with more implied encapsulating structures. For this project, implementing a simple complex number class in C++, Java, and Python has given a surface-level exposure to how these different philosophies lead to different code with their own benefits and drawbacks.
+
+Modularity:
+
+Verbosity:
+
+Mangleability:
+
+Comparison:
+
+Conclusion:
+
 
 see sebesta11.pptx for more info on how to describe obj-oriented programming and abstract data types
 C++ vs. C:
@@ -26,14 +37,21 @@ Differences in implementations:
     Complex objects access the instance variables of the other Complex because they are defined of the same class
     If you wanted to allow non-Complex classes to permissibly access instance variables in their methods, they must be in the same package
   - everything by reference
-
+    Everything is an object that gets passed by reference automatically. New assignments are given by reference to Objects
+  - Syntactically heavy
+    Because of how instance methods need to be accessed, Java necessitates a lot of syntactic sugar. Every object class requires a class declaration, and every instance method is accessed 
   C++:
   - Overloadable operators
     Achieved through writing operator methods, which overload the inherited basic operator methods
     Friend functions of built-in types allow us to override how primitive types interact with our object type
     << (bitwise lshift) gets overloaded by cout to yield an ostream, and we can create a friend of that too to extend an existing custom operator with support for our type
   - access instance methods through the scope resolution operator
+  - Object classes can be declared as structs, like C
 
   Python:
   - Overloadable operators
-    Achieved through special methods ("dunder" methods) that override built-in language functions to support additional types
+    Achieved through special methods ("dunder" methods) that are called by built-in language functions to support additional types
+  - No access modifiers necessary
+    Instance variables are declared in the constructor and are referred to in instance methods through reference `self`
+    Python does not handle functions differently from methods (member functions) and requires a reference to the object it is a member of in order to provide instance functionality.
+    
